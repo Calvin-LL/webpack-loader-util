@@ -7,11 +7,11 @@
 Install with npm:
 
 ```bash
-npm install @calvin-l/webpack-loader-util --save-dev
+npm install @calvin-l/webpack-loader-util
 ```
 
 Install with yarn:
 
 ```bash
-yarn add @calvin-l/webpack-loader-util --dev
+yarn add @calvin-l/webpack-loader-util
 ```
