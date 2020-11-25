@@ -1,13 +1,13 @@
 import loaderUtils from "loader-utils";
 import { loader } from "webpack";
 
-type OPTIONS = Readonly<Record<string, unknown>> | null;
+type OPTIONS = Readonly<Record<string, any>> | null;
 
 export function getOptions(
   loadContext: loader.LoaderContext,
   includeQuery = true,
   convertStringQueryParamsToNumber = false
-): Record<string, unknown> {
+): Record<string, any> {
   const options = loaderUtils.getOptions(loadContext) as OPTIONS;
   const queryObject =
     includeQuery && loadContext.resourceQuery
@@ -26,7 +26,7 @@ export function getOptions(
 function attemptToConvertValuesToNumbers<T extends OPTIONS>(object: T): T {
   if (!object) return null as T;
 
-  const result = { ...object } as Record<string, unknown>;
+  const result = { ...object } as Record<string, any>;
 
   Object.keys(result).forEach((key) => {
     if (isNumeric(result[key])) {

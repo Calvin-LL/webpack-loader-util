@@ -4,16 +4,27 @@ import {
   CompileOptions,
   WebpackTestBundle,
   WebpackTestCompiler,
-} from "@calvin-l/webpack-loader-util";
+} from "@calvin-l/webpack-loader-test-util";
+
+const loader = [
+  "testLoader",
+  "testLoaderNoQuery",
+  "testLoaderWithNumberConversion",
+] as const;
 
 interface MyCompileOptions extends Omit<CompileOptions, "entryFilePath"> {
   entryFileName?: string;
   loaderOptions?: Record<string, any>;
+  loader?: typeof loader[number];
 }
 
 export default class MyWebpackTestCompiler extends WebpackTestCompiler {
   compile(optioins: MyCompileOptions = {}): Promise<WebpackTestBundle> {
-    const { entryFileName = "index.js", loaderOptions = {} } = optioins;
+    const {
+      entryFileName = "index.js",
+      loaderOptions = {},
+      loader = "testLoader",
+    } = optioins;
     const fixturesDir = path.resolve(__dirname, "..", "fixtures");
 
     this.webpackConfig = {
@@ -24,7 +35,7 @@ export default class MyWebpackTestCompiler extends WebpackTestCompiler {
           test: /\.txt$/i,
           use: [
             {
-              loader: path.resolve(fixturesDir, "testLoader1.js"),
+              loader: path.resolve(fixturesDir, `${loader}.js`),
               options: loaderOptions,
             },
           ],
