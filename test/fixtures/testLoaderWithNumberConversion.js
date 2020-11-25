@@ -1,4 +1,4 @@
-const { getOptions } = require("../../dist/index");
+const { getOptions } = require("../../test-dist/index");
 
 module.exports = function (content) {
   const options = getOptions(this, true, true);
