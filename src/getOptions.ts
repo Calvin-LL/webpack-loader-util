@@ -15,7 +15,7 @@ export function getOptions<T extends Record<string, any> = any>(
       : null;
   const fullOptions: Partial<OPTIONS> = {
     ...options,
-    ...(convertStringQueryParamsToNumber
+    ...(includeQuery && convertStringQueryParamsToNumber
       ? attemptToConvertValuesToNumbers(queryObject)
       : queryObject),
   };
