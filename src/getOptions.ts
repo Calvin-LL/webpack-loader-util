@@ -3,11 +3,11 @@ import { loader } from "webpack";
 
 type OPTIONS = Readonly<Record<string, any>> | null;
 
-export function getOptions(
+export function getOptions<T extends Record<string, any> = any>(
   loadContext: loader.LoaderContext,
   includeQuery = true,
   convertStringQueryParamsToNumber = false
-): Record<string, any> {
+): T {
   const options = loaderUtils.getOptions(loadContext) as OPTIONS;
   const queryObject =
     includeQuery && loadContext.resourceQuery
@@ -20,7 +20,7 @@ export function getOptions(
       : queryObject),
   };
 
-  return fullOptions;
+  return fullOptions as T;
 }
 
 function attemptToConvertValuesToNumbers<T extends OPTIONS>(object: T): T {
