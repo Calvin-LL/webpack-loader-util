@@ -1,10 +1,10 @@
 import path from "path";
 
 import {
-  CompileOptions,
   WebpackTestBundle,
   WebpackTestCompiler,
 } from "@calvin-l/webpack-loader-test-util";
+import { CompileOptions } from "@calvin-l/webpack-loader-test-util/dist/WebpackTestCompiler";
 
 const loader = [
   "testLoader",
@@ -18,8 +18,8 @@ interface MyCompileOptions extends Omit<CompileOptions, "entryFilePath"> {
   loader?: typeof loader[number];
 }
 
-export default class MyWebpackTestCompiler extends WebpackTestCompiler {
-  compile(optioins: MyCompileOptions = {}): Promise<WebpackTestBundle> {
+export default class MyWebpackTestCompiler extends WebpackTestCompiler.default {
+  compile(optioins: MyCompileOptions = {}): Promise<WebpackTestBundle.default> {
     const {
       entryFileName = "index.js",
       loaderOptions = {},
